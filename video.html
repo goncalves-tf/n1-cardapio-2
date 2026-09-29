@@ -1,0 +1,663 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cardápio N1 2.0</title>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+:root{--y:#FFED00;--r:#FF0000;--b:#5A2A12;--c:#FFF6CC;--k:#141414}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;background:#141414;overflow:hidden;font-family:'Fira Sans',system-ui,sans-serif;color:var(--k);-webkit-font-smoothing:antialiased}
+#app{position:fixed;inset:0;display:flex;flex-direction:column;background:#141414}
+#view{position:relative;flex:1;overflow:hidden;background:#141414}
+#stage{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0;overflow:hidden;background:var(--r)}
+.scene{position:absolute;inset:0;overflow:hidden;display:none}
+.h{font-weight:900;font-style:italic;letter-spacing:-.025em;line-height:.95}
+.m{display:inline-block;overflow:hidden;vertical-align:bottom;padding:.06em .12em .12em .04em;margin:-.06em -.12em -.12em -.04em}
+.w{display:inline-block;will-change:transform}
+.ds{font-family:Dosis,sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+.stk{border:5px solid var(--k);box-shadow:8px 8px 0 var(--k);border-radius:30px}
+.abs{position:absolute}
+img{display:block}
+.ph{width:100%;height:100%;object-fit:cover}
+.circle{border-radius:50%;overflow:hidden}
+
+/* S1 */
+#s1{background:var(--r)}
+.s1-ghost{position:absolute;right:-120px;bottom:-300px;font-size:860px;color:transparent;-webkit-text-stroke:5px rgba(255,246,204,.22);opacity:0}
+.s1-logo{position:absolute;left:150px;top:230px;width:520px;height:520px;border-radius:50%;background:#fff;box-shadow:0 0 0 14px var(--y),20px 20px 0 14px var(--k)}
+.s1-logo img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.s1-t1{position:absolute;left:780px;top:170px;font-size:200px;color:var(--y)}
+.s1-t2{position:absolute;left:780px;top:360px;font-size:270px;color:var(--c)}
+.s1-sub{position:absolute;left:790px;top:660px;font-size:58px;color:var(--c);line-height:1.15}
+.s1-hl{display:inline-block;margin-top:14px;background:var(--y);color:var(--k);padding:6px 26px 10px;border:5px solid var(--k);box-shadow:8px 8px 0 var(--k);border-radius:18px;font-size:66px}
+.s1-band{position:absolute;left:-200px;top:925px;width:2400px;height:120px;background:var(--y);border-top:6px solid var(--k);border-bottom:6px solid var(--k);transform-origin:0 50%;overflow:hidden;display:flex;align-items:center}
+.s1-track{white-space:nowrap;font-size:64px;color:var(--k)}
+.s1-track span{color:var(--r)}
+
+/* S2 */
+#s2{background:var(--c)}
+.s2-h{position:absolute;left:120px;top:80px;font-size:140px;color:var(--k)}
+.s2-count{position:absolute;left:124px;top:250px;font-size:54px;color:var(--b)}
+.s2-count b{font-family:'Fira Sans';font-style:italic;font-weight:900;color:var(--r);font-size:78px;letter-spacing:-.02em}
+#grid{position:absolute;left:164px;top:390px;width:1600px;height:450px}
+.card{position:absolute;left:0;top:0;width:118px;height:96px;background:#fff;border:3px solid var(--k);border-radius:12px;box-shadow:5px 5px 0 var(--k);overflow:hidden}
+.card img{width:100%;height:58px;object-fit:cover;border-bottom:3px solid var(--k)}
+.card i{position:absolute;left:8px;height:7px;border-radius:4px;background:var(--k)}
+.card i.a{top:66px;width:70px;opacity:.85}.card i.b{top:79px;width:40px;background:var(--r)}
+.card u{position:absolute;right:7px;top:68px;width:16px;height:16px;border-radius:50%;border:2px solid var(--k)}
+.s2-band{position:absolute;left:-140px;top:560px;width:2200px;height:230px;background:var(--k);transform-origin:0 50%;display:flex;align-items:center;justify-content:center}
+.s2-band .h{font-size:100px;color:var(--y)}
+.s2-band em{font-style:italic;color:var(--c);background:var(--r);padding:0 .15em;border-radius:10px}
+
+/* S3 */
+#s3{background:var(--b)}
+.s3-h{position:absolute;left:120px;top:60px;font-size:170px;color:var(--c)}
+.s3-h em{font-style:italic;color:var(--y);font-size:240px}
+.leak{position:absolute;top:340px;width:520px;height:660px;background:var(--y);overflow:hidden}
+.leak.c{background:var(--c)}
+.leak .top{position:absolute;left:0;top:0;width:100%;height:230px;clip-path:polygon(0 0,100% 0,100% 80%,0 100%);overflow:hidden;border-bottom:0}
+.leak .top img{width:100%;height:100%;object-fit:cover}
+.leak .num{position:absolute;left:24px;top:24px;width:86px;height:86px;border-radius:50%;background:var(--r);border:5px solid var(--k);color:var(--c);font:900 italic 54px/76px 'Fira Sans';text-align:center}
+.leak .hero{position:absolute;left:34px;top:240px;font-size:104px;color:var(--r)}
+.leak .lbl{position:absolute;left:40px;top:370px;font-size:30px;color:var(--b)}
+.leak p{position:absolute;left:40px;right:36px;top:420px;font-size:36px;font-weight:700;line-height:1.2;color:var(--k)}
+
+/* S4 */
+#s4{background:var(--y)}
+.s4-h{position:absolute;left:120px;top:60px;font-size:130px;color:var(--k)}
+.s4-h em{font-style:italic;color:var(--r)}
+.col{position:absolute;top:290px;width:520px;height:760px;background:var(--c);text-align:center}
+.col.mid{background:var(--r);top:260px;height:800px}
+.col .who{margin-top:40px;font-size:108px;color:var(--k)}
+.col.mid .who{color:var(--y)}
+.col .pic{width:360px;height:360px;margin:26px auto 0;border-radius:50%;overflow:hidden;border:6px solid var(--k);box-shadow:8px 8px 0 var(--k);background:var(--y)}
+.col .nm{margin-top:34px;font-size:42px;color:var(--b)}
+.col.mid .nm{color:var(--c)}
+.col .pr{margin-top:4px;font-size:88px;color:var(--k)}
+.col.mid .pr{color:var(--y)}
+.badge{position:absolute;right:-95px;top:170px;width:190px;height:190px;background:var(--y);display:flex;align-items:center;justify-content:center;text-align:center;font-size:30px;line-height:1.02;color:var(--k);z-index:3}
+.badge-in{filter:drop-shadow(8px 8px 0 #141414)}
+
+/* S5 */
+#s5{background:var(--c)}
+.s5-h{position:absolute;left:120px;top:60px;font-size:140px;color:var(--k)}
+.s5-h em{font-style:italic;background:var(--r);color:var(--y);padding:0 .14em;border-radius:18px}
+.s5-card{position:absolute;left:120px;top:300px;width:860px;height:680px;background:var(--y);overflow:hidden}
+.s5-card .ph{position:absolute;inset:0}
+.s5-trio{clip-path:circle(0% at 70% 50%)}
+.s5-chip{position:absolute;left:30px;bottom:30px;background:var(--k);color:var(--y);padding:14px 30px 18px;border-radius:22px;border:5px solid var(--k)}
+.s5-chip .lb{height:44px;overflow:hidden;position:relative;font-size:38px;color:var(--c)}
+.s5-chip .lb span{position:absolute;left:0;top:0;white-space:nowrap}
+.s5-chip .pz{font-size:92px}
+.fly{position:absolute;width:300px;height:300px;border-radius:50%;overflow:hidden;border:6px solid var(--k);box-shadow:8px 8px 0 var(--k);background:var(--y);z-index:4}
+.fly-t{position:absolute;z-index:5;background:var(--k);color:var(--y);font-size:36px;padding:6px 18px;border-radius:12px}
+.s5-r{position:absolute;left:1180px;top:330px;width:680px}
+.s5-r .lb{font-size:44px;color:var(--b)}
+.s5-r .big{font-size:150px;color:var(--k);margin-top:8px}
+.meter{margin-top:26px;width:640px;height:46px;border:5px solid var(--k);border-radius:30px;overflow:hidden;background:#fff;box-shadow:6px 6px 0 var(--k)}
+.meter div{width:100%;height:100%;background:var(--r);transform-origin:0 50%;transform:scaleX(0)}
+.s5-selo{position:absolute;left:1180px;top:720px;background:var(--r);color:var(--y);padding:22px 40px 28px;z-index:3}
+.s5-selo .h{font-size:110px}
+.s5-selo .ds{font-size:40px;color:var(--c);margin-top:6px}
+
+/* S6 */
+#s6{background:var(--r)}
+.s6-h{position:absolute;left:120px;top:80px;font-size:104px;color:var(--y)}
+.s6-card{position:absolute;left:310px;top:300px;width:1300px;height:600px;background:var(--c)}
+.s6-card .pic{position:absolute;left:0;top:0;width:580px;height:100%;overflow:hidden;clip-path:polygon(0 0,100% 0,86% 100%,0 100%);border-radius:25px 0 0 25px}
+.s6-card .txt{position:absolute;left:600px;top:60px}
+.s6-card .nm{font-size:48px;color:var(--b)}
+.s6-old{position:relative;display:inline-block;margin-top:18px;font-size:84px;font-weight:700;color:var(--b)}
+.s6-old i{position:absolute;left:-8px;right:-8px;top:52%;height:10px;background:var(--r);border-radius:6px;transform-origin:0 50%;transform:scaleX(0)}
+.s6-new{font-size:150px;color:var(--k);margin-top:6px}
+.s6-tag{position:absolute;right:-50px;bottom:-56px;background:var(--y);padding:16px 34px 22px;font-size:58px;color:var(--k);z-index:3}
+.s6-cmv{position:absolute;left:316px;top:968px;font-size:42px;color:var(--c)}
+.s6-cmv b{color:var(--y)}
+
+/* S7 */
+#s7{background:var(--k)}
+.s7-h{position:absolute;left:120px;top:70px;font-size:170px;color:var(--y)}
+.s7-sub{position:absolute;left:124px;top:280px;font-size:50px;font-weight:700;color:var(--c);line-height:1.25}
+.s7-sub3{position:absolute;left:124px;top:440px;font-size:54px;font-weight:800;color:var(--y)}
+.s7-row{position:absolute;left:124px;width:880px}
+.s7-row .ds{font-size:38px;color:var(--c);margin-bottom:12px}
+.s7-bar{height:84px;border-radius:18px;border:5px solid var(--c);transform-origin:0 50%;display:flex;align-items:center;justify-content:flex-end;padding-right:24px}
+.s7-bar b{font:900 italic 52px 'Fira Sans';color:var(--k)}
+#days{position:absolute;left:1130px;top:600px;width:660px;height:330px;display:flex;align-items:flex-end;gap:14px}
+#days div{flex:1;height:100%;background:var(--y);border-radius:8px 8px 0 0;transform-origin:50% 100%;transform:scaleY(0)}
+#days div:nth-child(2n){background:var(--r)}
+.s7-day{position:absolute;left:1130px;top:950px;font-size:42px;color:var(--c)}
+.s7-day b{color:var(--y)}
+
+/* S8 */
+#s8{background:var(--y)}
+.s8-band{position:absolute;left:-200px;top:470px;width:2400px;height:330px;background:var(--r);border-top:8px solid var(--k);border-bottom:8px solid var(--k);transform-origin:0 50%}
+.s8-logo{position:absolute;left:780px;top:80px;width:360px;height:360px;border-radius:50%;background:#fff;box-shadow:0 0 0 12px var(--r),16px 16px 0 12px var(--k)}
+.s8-logo img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.s8-t{position:absolute;left:0;right:0;top:500px;text-align:center;font-size:250px;color:var(--y)}
+.s8-f{position:absolute;left:0;right:0;top:870px;text-align:center;font-size:56px;color:var(--k)}
+
+/* wipes, grain, overlay */
+#wipe{position:absolute;inset:0;z-index:50;pointer-events:none;overflow:hidden}
+.wb{position:absolute;left:0;top:-20px;width:3000px;height:1120px;transform:translateX(2400px) skewX(-20deg)}
+.wr{background:var(--r);z-index:3}.wy{background:var(--y);z-index:2}.wk{background:var(--k);z-index:1}
+#grain{position:absolute;left:-100px;top:-100px;width:2120px;height:1280px;z-index:60;pointer-events:none;opacity:.06;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.ov{position:absolute;inset:0;z-index:70;display:flex;align-items:flex-end;justify-content:center;padding-bottom:70px;background:linear-gradient(to top,rgba(20,20,20,.55),rgba(20,20,20,0) 45%)}
+.ov[hidden]{display:none}
+.bigbtn{font:900 italic 60px 'Fira Sans';letter-spacing:-.02em;background:var(--y);color:var(--k);border:7px solid var(--k);box-shadow:14px 14px 0 var(--k);border-radius:999px;padding:22px 60px 28px;cursor:pointer;transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s cubic-bezier(.2,.8,.2,1)}
+.bigbtn:hover{transform:translate(-4px,-4px);box-shadow:18px 18px 0 var(--k)}
+.bigbtn:active{transform:translate(8px,8px);box-shadow:6px 6px 0 var(--k)}
+.bigbtn:focus-visible{outline:6px solid var(--c);outline-offset:8px}
+
+/* controls */
+#bar{height:56px;flex:none;display:flex;align-items:center;gap:12px;padding:0 16px;background:#141414;color:var(--c);font-family:Dosis,sans-serif;font-weight:600;border-top:2px solid #2a2a2a}
+#bar button{flex:none;width:40px;height:40px;border-radius:10px;border:2px solid #3a3a3a;background:#1f1f1f;color:var(--y);cursor:pointer;display:flex;align-items:center;justify-content:center}
+#bar button:hover{background:#2a2a2a;border-color:var(--y)}
+#bar button:focus-visible{outline:3px solid var(--y);outline-offset:2px}
+#bar svg{width:18px;height:18px;fill:currentColor}
+#track{position:relative;flex:1;height:26px;cursor:pointer;display:flex;align-items:center;touch-action:none}
+#track .rail{position:relative;width:100%;height:8px;border-radius:6px;background:#333;overflow:hidden}
+#fill{position:absolute;left:0;top:0;height:100%;width:0;background:var(--y)}
+#track .tick{position:absolute;top:50%;width:2px;height:14px;margin-top:-7px;background:#555;pointer-events:none}
+#knob{position:absolute;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:var(--y);border:3px solid #141414;left:0;pointer-events:none}
+#time{flex:none;min-width:92px;text-align:right;font-size:17px;letter-spacing:.04em;font-variant-numeric:tabular-nums}
+</style>
+</head>
+<body>
+<div id="app">
+<div id="view">
+<div id="stage">
+
+<!-- 1 -->
+<section class="scene" id="s1">
+  <div class="s1-ghost h" id="s1ghost">2.0</div>
+  <div class="s1-band" id="s1band"><div class="s1-track ds" id="s1track"></div></div>
+  <div class="s1-logo" id="s1logo"><img src="assets/brand/logo.jpg" alt="N1 Chicken"></div>
+  <div class="s1-t1 h" id="s1t1">Cardápio</div>
+  <div class="s1-t2 h" id="s1t2">N1 2.0</div>
+  <div class="s1-sub ds">
+    <div id="s1a">Mesma cozinha. Mesmo frango.</div>
+    <div class="s1-hl" id="s1hl">Pedido maior.</div>
+  </div>
+</section>
+
+<!-- 2 -->
+<section class="scene" id="s2">
+  <div class="s2-h h" id="s2h">O upsell existe no iFood.</div>
+  <div class="s2-count ds" id="s2c"><b id="c47">0</b>% dos pedidos sem extra · <b id="c6">0</b> grupos de adicionais</div>
+  <div id="grid"></div>
+  <div class="s2-band" id="s2band"><div class="h" id="s2bt">e a gente deixa <em>dinheiro</em> na mesa.</div></div>
+</section>
+
+<!-- 3 -->
+<section class="scene" id="s3">
+  <div class="s3-h h" id="s3h"><em>3</em> vazamentos</div>
+  <div class="leak stk" id="lk1" style="left:120px">
+    <div class="top"><img src="assets/prod/dois-burgers.jpg" alt=""></div>
+    <div class="num">1</div>
+    <div class="hero h" id="lk1n">0%</div>
+    <div class="lbl ds">vendidos em 30 dias</div>
+    <p>O #1 da marca, 10.718 vendidos, não tem adicional</p>
+  </div>
+  <div class="leak c stk" id="lk2" style="left:700px">
+    <div class="top"><img src="assets/brand/capa.png" alt=""></div>
+    <div class="num">2</div>
+    <div class="hero h" id="lk2n">R$ 0,00</div>
+    <div class="lbl ds">é o preço do 1º item</div>
+    <p>O primeiro item da loja é um cupom de R$ 0,01 que pede para não comprar</p>
+  </div>
+  <div class="leak stk" id="lk3" style="left:1280px">
+    <div class="top"><img src="assets/prod/maioneses.jpg" alt=""></div>
+    <div class="num">3</div>
+    <div class="hero h" id="lk3n">R$ 0,00</div>
+    <div class="lbl ds">de CMV no kit</div>
+    <p>Kit 4 maioneses a R$ 14,90: CMV de até 50%</p>
+  </div>
+</section>
+
+<!-- 4 -->
+<section class="scene" id="s4">
+  <div class="s4-h h" id="s4h"><em>Novo:</em> comece pela fome.</div>
+  <div class="col stk" id="col1" style="left:120px">
+    <div class="who h">Só eu</div>
+    <div class="pic"><img class="ph" src="assets/prod/trio-burger.jpg" alt=""></div>
+    <div class="nm ds">Trio Burger</div>
+    <div class="pr h" id="p1">R$ 44,90</div>
+  </div>
+  <div class="col mid stk" id="col2" style="left:700px">
+    <div class="badge-in" id="badgeW"><div class="badge ds" id="badge">Mais<br>escolhido</div></div>
+    <div class="who h">Pra dividir</div>
+    <div class="pic"><img class="ph" src="assets/prod/combo-m.jpg" alt=""></div>
+    <div class="nm ds">Combo M</div>
+    <div class="pr h" id="p2">R$ 79,90</div>
+  </div>
+  <div class="col stk" id="col3" style="left:1280px">
+    <div class="who h">A galera</div>
+    <div class="pic"><img class="ph" src="assets/prod/combo-g.jpg" alt=""></div>
+    <div class="nm ds">Combo G</div>
+    <div class="pr h" id="p3">R$ 139,90</div>
+  </div>
+</section>
+
+<!-- 5 -->
+<section class="scene" id="s5">
+  <div class="s5-h h" id="s5h">Vira Trio por <em>+ R$ 13</em></div>
+  <div class="s5-card stk" id="s5card">
+    <img class="ph" src="assets/prod/chicken-burger.jpg" alt="">
+    <img class="ph s5-trio" id="s5trio" src="assets/prod/trio-burger.jpg" alt="">
+    <div class="s5-chip" id="s5chip">
+      <div class="lb ds"><span id="lbA">Chicken Burger</span><span id="lbB">Trio Burger</span></div>
+      <div class="pz h" id="s5p">R$ 31,90</div>
+    </div>
+  </div>
+  <div class="fly" id="fb" style="left:830px;top:250px"><img class="ph" src="assets/prod/batata.jpg" alt=""></div>
+  <div class="fly-t ds" id="fbt" style="left:900px;top:520px">+ batata</div>
+  <div class="fly" id="fc" style="left:830px;top:640px"><img class="ph" src="assets/prod/coca.jpg" alt=""></div>
+  <div class="fly-t ds" id="fct" style="left:920px;top:905px">+ coca</div>
+  <div class="s5-r">
+    <div class="lb ds" id="s5l">Margem por pedido</div>
+    <div class="big h" id="s5m">R$ 24,87</div>
+    <div class="meter" id="s5met"><div id="s5fill"></div></div>
+  </div>
+  <div class="s5-selo stk" id="s5selo">
+    <div class="h">+ R$ 7,24</div>
+    <div class="ds">de margem por pedido</div>
+  </div>
+</section>
+
+<!-- 6 -->
+<section class="scene" id="s6">
+  <div class="s6-h h" id="s6h">Adicional no item certo.</div>
+  <div class="s6-card stk" id="s6card">
+    <div class="pic"><img class="ph" id="s6img" src="assets/prod/dois-burgers.jpg" alt=""></div>
+    <div class="txt">
+      <div class="nm ds" id="s6nm">2 Burguers + batata e Coca</div>
+      <div class="s6-old" id="s6old">Hoje R$ 44,90<i id="s6strike" style="display:none"></i></div>
+      <div class="s6-new h" id="s6new">R$ 44,90</div>
+    </div>
+    <div class="s6-tag stk h" id="s6tag">+ R$ 9,24 de margem por aceite</div>
+  </div>
+  <div class="s6-cmv ds" id="s6cmv">Com 20% de aceite no #1 da marca: <b id="s6c">R$ 0,0 mil</b> de margem em 30 dias</div>
+</section>
+
+<!-- 7 -->
+<section class="scene" id="s7">
+  <div class="s7-h h" id="s7h">Teste de <span id="d14">1</span> dias.</div>
+  <div class="s7-sub">
+    <div id="s7a">Metade das vitrines com o cardápio novo.</div>
+    <div id="s7b">Metade com o atual.</div>
+  </div>
+  <div class="s7-sub3" id="s7c">Mede conversão, ticket médio e margem.</div>
+  <div class="s7-row" id="r1" style="top:590px"><div class="ds">Cardápio novo</div><div class="s7-bar" id="b1" style="background:var(--y);border-color:var(--y)"><b id="b1n">0%</b></div></div>
+  <div class="s7-row" id="r2" style="top:790px"><div class="ds">Cardápio atual</div><div class="s7-bar" id="b2" style="background:var(--c)"><b id="b2n">0%</b></div></div>
+  <div id="days"></div>
+  <div class="s7-day ds" id="s7d">Dia <b id="dn">0</b> de 14</div>
+</section>
+
+<!-- 8 -->
+<section class="scene" id="s8">
+  <div class="s8-band" id="s8band"></div>
+  <div class="s8-logo" id="s8logo"><img src="assets/brand/logo.jpg" alt="N1 Chicken"></div>
+  <div class="s8-t h" id="s8t">Pede o trio.</div>
+  <div class="s8-f ds" id="s8f">N1 Chicken · Frango frito crocante</div>
+</section>
+
+<div id="wipe"><div class="wb wk" id="wk"></div><div class="wb wy" id="wy"></div><div class="wb wr" id="wr"></div></div>
+<div id="grain"></div>
+<div class="ov" id="ovStart"><button class="bigbtn" id="btnStart" type="button">▶ Assistir (60s)</button></div>
+<div class="ov" id="ovEnd" hidden><button class="bigbtn" id="btnAgain" type="button">↻ Ver de novo</button></div>
+</div>
+</div>
+<div id="bar">
+  <button id="bPlay" type="button" aria-label="Play"><svg viewBox="0 0 24 24" id="icPlay"><path d="M6 4l14 8-14 8z"/></svg></button>
+  <button id="bRe" type="button" aria-label="Reiniciar"><svg viewBox="0 0 24 24"><path d="M12 4a8 8 0 1 1-7.4 5h2.3A6 6 0 1 0 12 6v3L7 5l5-4z"/></svg></button>
+  <div id="track" aria-label="Progresso"><div class="rail"><div id="fill"></div></div><div id="knob"></div></div>
+  <div id="time">0:00 / 1:00</div>
+</div>
+</div>
+
+<script>
+(function(){
+'use strict';
+var DUR = 60, POSTER = 4.2;
+var E = 'cubic-bezier(.2,.8,.2,1)';
+var RM = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var $ = function(id){ return document.getElementById(id); };
+var anims = [], counters = [], seen = new WeakSet();
+
+/* animation helper: WAAPI paused, scrubbed by timeline */
+function A(el, kf, t0, dur, opt){
+  opt = opt || {};
+  var fill = seen.has(el) ? 'forwards' : 'both';
+  seen.add(el);
+  var it = opt.it || 1;
+  var timing = RM
+    ? {duration: 1, delay: t0 * 1000, fill: fill, easing: 'linear', iterations: 1}
+    : {duration: dur * 1000, delay: t0 * 1000, fill: fill, easing: opt.ease || E, iterations: it};
+  if (RM && it > 1) return;
+  var a = el.animate(kf, timing); a.pause(); anims.push(a); return a;
+}
+function C(el, from, to, t0, dur, fmt){ counters.push({el:el, a:from, b:to, t0:t0, d:dur, f:fmt}); }
+var brl = function(v){ return 'R$ ' + v.toFixed(2).replace('.', ','); };
+var int = function(v){ return Math.round(v).toLocaleString("pt-BR"); };
+var pct0 = function(v){ return Math.round(v) + '%'; };
+var pct1 = function(v){ return v.toFixed(1).replace('.', ',') + '%'; };
+
+/* split words into masked spans */
+function split(el){
+  var out = [], nodes = Array.prototype.slice.call(el.childNodes);
+  el.innerHTML = '';
+  nodes.forEach(function(n){
+    if (n.nodeType === 3){
+      n.textContent.split(/(\s+)/).forEach(function(p){
+        if (!p) return;
+        if (/^\s+$/.test(p)){ el.appendChild(document.createTextNode(' ')); return; }
+        out.push(wrap(el, document.createTextNode(p)));
+      });
+    } else if (n.nodeName === 'BR'){ el.appendChild(n); }
+    else out.push(wrap(el, n));
+  });
+  return out;
+}
+function wrap(el, node){
+  var m = document.createElement('span'); m.className = 'm';
+  var w = document.createElement('span'); w.className = 'w';
+  w.appendChild(node); m.appendChild(w); el.appendChild(m); return w;
+}
+function reveal(el, t0, st, dur){
+  split(el).forEach(function(w, i){
+    A(w, [{transform:'translateY(115%) rotate(7deg)'}, {transform:'translateY(0%) rotate(0deg)'}], t0 + i * (st || .07), dur || .75);
+  });
+}
+function up(el, t0, dur, dist){
+  A(el, [{opacity:0, transform:'translateY(' + (dist || 60) + 'px)'}, {opacity:1, transform:'translateY(0px)'}], t0, dur || .7);
+}
+/* spring pop keyframes with final rotation */
+function popKF(r){
+  return [
+    {transform:'rotate(' + (r - 40) + 'deg) scale(0)', easing:E},
+    {transform:'rotate(' + (r + 8) + 'deg) scale(1.16)', offset:.5, easing:'ease-in-out'},
+    {transform:'rotate(' + (r - 3) + 'deg) scale(.94)', offset:.75, easing:'ease-in-out'},
+    {transform:'rotate(' + r + 'deg) scale(1)'}
+  ];
+}
+function riseKF(r, dy){
+  dy = dy || 1000;
+  return [
+    {transform:'translateY(' + dy + 'px) rotate(' + (r + 10) + 'deg)', easing:E},
+    {transform:'translateY(-28px) rotate(' + (r - 1.5) + 'deg)', offset:.6, easing:'ease-in-out'},
+    {transform:'translateY(0px) rotate(' + r + 'deg)'}
+  ];
+}
+function spinKF(){
+  return [
+    {transform:'rotate(-720deg) scale(0)', easing:E},
+    {transform:'rotate(14deg) scale(1.12)', offset:.55, easing:'ease-in-out'},
+    {transform:'rotate(-6deg) scale(.95)', offset:.76, easing:'ease-in-out'},
+    {transform:'rotate(2deg) scale(1.02)', offset:.9, easing:'ease-in-out'},
+    {transform:'rotate(0deg) scale(1)'}
+  ];
+}
+var L = {ease:'linear'};
+
+/* ---------- SCENE 1 (0 a 5) ---------- */
+$('s1track').innerHTML = new Array(9).join('Frango frito crocante <span>●</span> Cardápio 2.0 <span>●</span> ');
+A($('s1band'), [{transform:'rotate(-4deg) scaleX(0)'}, {transform:'rotate(-4deg) scaleX(1)'}], .2, .8);
+A($('s1track'), [{transform:'translateX(0px)'}, {transform:'translateX(-1100px)'}], 0, 5, L);
+A($('s1logo'), spinKF(), .1, 1.4, L);
+A($('s1ghost'), [{opacity:0, transform:'translateX(300px)'}, {opacity:1, transform:'translateX(0px)'}], .5, 2.2);
+reveal($('s1t1'), .85, .08, .8);
+reveal($('s1t2'), 1.1, .1, .85);
+reveal($('s1a'), 1.9, .12, .7);
+A($('s1hl'), popKF(-3), 2.9, .9, L);
+
+/* ---------- SCENE 2 (5 a 13) ---------- */
+var PICS = ['trio-burger','chicken-burger','bbc','caixa-p','caixa-m','combo-m','combo-g','combo-gg','super-combo','batata','coca','brigadeiro','maioneses','trio-caixa-p','dois-burgers-cocas','onion-burger','garlic-bacon','bites-p','bites-m','caixa-g','onion-rings','batata-cheddar','salada-burger','churros','coca-zero','coca-2l','executivo','parmegiana','fricasse','estrogonofe','bbq','combo-p','tradicional','pure','aipim','arroz','salada','frango-salada','dois-burgers','trio-caixa-m'];
+var CAT = ['#FF0000','#FFED00','#5A2A12','#141414','#FFF6CC','#FF8A00'];
+var seed = 7; function rnd(){ seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
+var grid = $('grid'), N = 47, pos = [];
+for (var i = 0; i < N; i++){
+  var c = i % 12, r = Math.floor(i / 12);
+  pos.push({x: c * 134 + (r === 3 ? 67 : 0), y: r * 114});
+}
+function shuffle(){ var p = pos.slice(); for (var k = p.length - 1; k > 0; k--){ var j = Math.floor(rnd() * (k + 1)); var t = p[k]; p[k] = p[j]; p[j] = t; } return p; }
+var P1 = shuffle(), P2 = shuffle();
+var order = pos.map(function(_, k){ return k; }).sort(function(){ return rnd() - .5; });
+for (i = 0; i < N; i++){
+  var d = document.createElement('div'); d.className = 'card';
+  d.innerHTML = '<img src="assets/prod/' + PICS[i % PICS.length] + '.jpg" alt=""><i class="a"></i><i class="b"></i><u style="background:' + CAT[i % 6] + '"></u>';
+  grid.appendChild(d);
+  var p0 = pos[i], r0 = (rnd() - .5) * 8, rA = (rnd() - .5) * 80;
+  var tr = function(p, rr){ return 'translate(' + p.x + 'px,' + p.y + 'px) rotate(' + rr + 'deg)'; };
+  var t0 = 5.45 + order.indexOf(i) * .032;
+  A(d, [{transform:'translate(' + p0.x + 'px,' + (p0.y - 1300) + 'px) rotate(' + rA + 'deg)'}, {transform:tr(p0, r0)}], t0, .75, {ease:'cubic-bezier(.3,1.35,.5,1)'});
+  var r1 = (rnd() - .5) * 24, r2 = (rnd() - .5) * 24, st = order.indexOf(i) * .005;
+  A(d, [{transform:tr(p0, r0)}, {transform:tr(P1[i], r1)}], 8.05 + st, .6);
+  A(d, [{transform:tr(P1[i], r1)}, {transform:tr(P2[i], r2)}], 8.85 + st, .6);
+  A(d, [{transform:tr(P2[i], r2)}, {transform:tr(p0, r0)}], 9.65 + st, .6);
+  A(d, [{opacity:1, filter:'grayscale(0)'}, {opacity:.22, filter:'grayscale(1)'}], 10.45, .5);
+}
+reveal($('s2h'), 5.2, .08, .75);
+up($('s2c'), 5.7, .6, 40);
+C($('c47'), 0, 88, 5.7, 1.9, int);
+C($('c6'), 0, 6, 5.9, 1.6, int);
+A($('s2band'), [{transform:'rotate(-3deg) scaleX(0)'}, {transform:'rotate(-3deg) scaleX(1)'}], 10.35, .55);
+reveal($('s2bt'), 10.6, .07, .7);
+
+/* ---------- SCENE 3 (13 a 24) ---------- */
+reveal($('s3h'), 13.2, .12, .8);
+[['lk1', 14.2, -2, 10718, int], ['lk2', 16.8, 1.5, 0.01, brl], ['lk3', 19.4, -1.5, 50, pct0]].forEach(function(o){
+  var el = $(o[0]);
+  A(el, riseKF(o[2]), o[1], 1.0, L);
+  A(el.querySelector('.top img'), [{transform:'scale(1.45)'}, {transform:'scale(1)'}], o[1], 1.8);
+  A(el.querySelector('.num'), popKF(0), o[1] + .35, .8, L);
+  up(el.querySelector('.hero'), o[1] + .35, .6, 30);
+  C($(o[0] + 'n'), 0, o[3], o[1] + .4, 1.1, o[4]);
+  up(el.querySelector('.lbl'), o[1] + .5, .5, 20);
+  up(el.querySelector('p'), o[1] + .55, .6, 30);
+});
+/* all three shake once at the end as a leak alarm */
+['lk1','lk2','lk3'].forEach(function(id, k){
+  var r = [-2, 1.5, -1.5][k];
+  A($(id), [{transform:'translateY(0px) rotate(' + r + 'deg)'}, {transform:'translateY(-18px) rotate(' + (r - 3) + 'deg)'}, {transform:'translateY(0px) rotate(' + (r + 2) + 'deg)'}, {transform:'translateY(0px) rotate(' + r + 'deg)'}], 22.3 + k * .12, .6, {ease:'ease-in-out'});
+});
+
+/* ---------- SCENE 4 (24 a 33) ---------- */
+reveal($('s4h'), 24.2, .08, .75);
+[['col1', 24.85, 44.9], ['col2', 25.1, 79.9], ['col3', 25.35, 139.9]].forEach(function(o, k){
+  var el = $(o[0]);
+  A(el, [{transform:'translateY(1000px) scale(1)', easing:E}, {transform:'translateY(-30px) scale(1)', offset:.62, easing:'ease-in-out'}, {transform:'translateY(0px) scale(1)'}], o[1], 1.1, L);
+  A(el.querySelector('.pic'), popKF(0), o[1] + .4, .9, L);
+  C($('p' + (k + 1)), 0, o[2], o[1] + .5, 1.0, brl);
+});
+A($('col1'), [{transform:'translateY(0px) scale(1)'}, {transform:'translateY(20px) scale(.94)'}], 27.0, .7);
+A($('col3'), [{transform:'translateY(0px) scale(1)'}, {transform:'translateY(20px) scale(.94)'}], 27.0, .7);
+A($('col1'), [{opacity:1}, {opacity:.72}], 27.0, .7);
+A($('col3'), [{opacity:1}, {opacity:.72}], 27.0, .7);
+A($('col2'), [{transform:'translateY(0px) scale(1)'}, {transform:'translateY(-26px) scale(1.06)'}], 27.0, .7);
+(function(){
+  var pts = [], n = 22;
+  for (var k = 0; k < n * 2; k++){
+    var a = Math.PI * k / n, rr = k % 2 ? 43 : 50;
+    pts.push((50 + rr * Math.cos(a)).toFixed(2) + '% ' + (50 + rr * Math.sin(a)).toFixed(2) + '%');
+  }
+  $('badge').style.clipPath = 'polygon(' + pts.join(',') + ')';
+})();
+A($('badge'), popKF(12), 27.2, .9, L);
+A($('badge'), [{transform:'rotate(12deg) scale(1)'}, {transform:'rotate(12deg) scale(1.13)'}, {transform:'rotate(12deg) scale(1)'}], 28.2, .8, {ease:'ease-in-out', it:6});
+
+/* ---------- SCENE 5 (33 a 43) ---------- */
+reveal($('s5h'), 33.2, .08, .75);
+A($('s5card'), [{transform:'translateX(-1300px) rotate(-8deg) scale(1)', easing:E}, {transform:'translateX(30px) rotate(1deg) scale(1)', offset:.6, easing:'ease-in-out'}, {transform:'translateX(0px) rotate(0deg) scale(1)'}], 33.55, 1.0, L);
+up($('s5chip'), 34.2, .6, 50);
+A($('lbB'), [{transform:'translateY(100%)'}, {transform:'translateY(0%)'}], 37.6, .5);
+A($('lbA'), [{transform:'translateY(0%)'}, {transform:'translateY(-110%)'}], 37.6, .5);
+up($('s5l'), 34.4, .6, 30);
+up($('s5m'), 34.55, .7, 50);
+up($('s5met'), 34.7, .6, 30);
+A($('s5fill'), [{transform:'scaleX(0)'}, {transform:'scaleX(.775)'}], 34.9, 1.0);
+A($('fb'), [{transform:'translate(1100px,-500px) rotate(160deg) scale(1)', easing:E}, {transform:'translate(-14px,10px) rotate(-12deg) scale(1)', offset:.65, easing:'ease-in-out'}, {transform:'translate(0px,0px) rotate(-6deg) scale(1)'}], 35.35, .85, L);
+A($('fbt'), popKF(-4), 35.95, .7, L);
+A($('fc'), [{transform:'translate(1100px,500px) rotate(-160deg) scale(1)', easing:E}, {transform:'translate(-14px,-10px) rotate(10deg) scale(1)', offset:.65, easing:'ease-in-out'}, {transform:'translate(0px,0px) rotate(5deg) scale(1)'}], 35.85, .85, L);
+A($('fct'), popKF(3), 36.45, .7, L);
+A($('fb'), [{transform:'translate(0px,0px) rotate(-6deg) scale(1)'}, {transform:'translate(-330px,120px) rotate(40deg) scale(0)'}], 37.25, .38, {ease:'cubic-bezier(.6,0,.9,.4)'});
+A($('fc'), [{transform:'translate(0px,0px) rotate(5deg) scale(1)'}, {transform:'translate(-330px,-160px) rotate(-40deg) scale(0)'}], 37.3, .38, {ease:'cubic-bezier(.6,0,.9,.4)'});
+A($('fbt'), [{opacity:1}, {opacity:0}], 37.2, .2);
+A($('fct'), [{opacity:1}, {opacity:0}], 37.2, .2);
+A($('s5trio'), [{clipPath:'circle(0% at 70% 50%)'}, {clipPath:'circle(85% at 50% 50%)'}], 37.55, .6);
+A($('s5card'), [{transform:'translateX(0px) rotate(0deg) scale(1)'}, {transform:'translateX(0px) rotate(-1.5deg) scale(1.05)'}, {transform:'translateX(0px) rotate(0deg) scale(1)'}], 37.55, .6, {ease:'ease-out'});
+C($('s5p'), 31.9, 44.9, 37.7, .9, brl);
+C($('s5m'), 24.87, 32.11, 38.5, 1.6, brl);
+A($('s5fill'), [{transform:'scaleX(.775)'}, {transform:'scaleX(1)'}], 38.5, 1.6);
+A($('s5m'), [{color:'#141414'}, {color:'#FF0000'}], 40.0, .3);
+A($('s5selo'), popKF(-4), 40.35, .9, L);
+
+/* ---------- SCENE 6 (43 a 51) ---------- */
+reveal($('s6h'), 43.2, .08, .75);
+A($('s6card'), [{transform:'rotate(-8deg) scale(.4)', opacity:0, easing:E}, {transform:'rotate(1.5deg) scale(1.04)', opacity:1, offset:.6, easing:'ease-in-out'}, {transform:'rotate(0deg) scale(1)', opacity:1}], 43.65, 1.0, L);
+A($('s6img'), [{transform:'scale(1.35)'}, {transform:'scale(1)'}], 43.65, 2.4);
+up($('s6nm'), 44.2, .6, 30);
+up($('s6old'), 44.4, .6, 30);
+up($('s6new'), 44.6, .7, 50);
+A($('s6strike'), [{transform:'scaleX(0)'}, {transform:'scaleX(1)'}], 45.25, .45);
+C($('s6new'), 44.9, 59.8, 45.35, 1.1, brl);
+A($('s6tag'), popKF(-5), 46.55, .9, L);
+up($('s6cmv'), 47.5, .6, 30);
+C($('s6c'), 0, 19.8, 47.6, 1.1, function(v){ return 'R$ ' + v.toFixed(1).replace('.', ',') + ' mil'; });
+
+/* ---------- SCENE 7 (51 a 57) ---------- */
+reveal($('s7h'), 51.15, .1, .75);
+C($('d14'), 1, 14, 51.3, .9, int);
+reveal($('s7a'), 51.85, .05, .6);
+reveal($('s7b'), 52.3, .05, .6);
+up($('r1'), 52.6, .5, 30);
+up($('r2'), 52.8, .5, 30);
+A($('b1'), [{transform:'scaleX(0)'}, {transform:'scaleX(1)'}], 52.75, 1.1);
+A($('b2'), [{transform:'scaleX(0)'}, {transform:'scaleX(1)'}], 52.95, 1.1);
+C($('b1n'), 0, 50, 52.75, 1.1, pct0);
+C($('b2n'), 0, 50, 52.95, 1.1, pct0);
+var days = $('days');
+for (i = 0; i < 14; i++){
+  var db = document.createElement('div'); days.appendChild(db);
+  A(db, [{transform:'scaleY(0)'}, {transform:'scaleY(1)'}], 53.3 + i * .13, .5, {ease:'cubic-bezier(.3,1.4,.5,1)'});
+}
+up($('s7d'), 53.2, .5, 20);
+C($('dn'), 0, 14, 53.3, 14 * .13 + .3, int);
+reveal($('s7c'), 54.5, .06, .65);
+
+/* ---------- SCENE 8 (57 a 60) ---------- */
+A($('s8band'), [{transform:'rotate(-5deg) scaleX(0)'}, {transform:'rotate(-5deg) scaleX(1)'}], 57.0, .6);
+A($('s8logo'), spinKF(), 57.1, 1.2, L);
+reveal($('s8t'), 57.45, .1, .8);
+up($('s8f'), 58.1, .7, 30);
+
+/* ---------- wipes on every cut ---------- */
+var CUTS = [5, 13, 24, 33, 43, 51, 57];
+if (RM) $('wipe').style.display = 'none';
+else CUTS.forEach(function(T){
+  var kf = [{transform:'translateX(2400px) skewX(-20deg)'}, {transform:'translateX(-3400px) skewX(-20deg)'}], ez = {ease:'cubic-bezier(.75,0,.25,1)'};
+  A($('wr'), kf, T - .4, .8, ez);
+  A($('wy'), kf, T - .31, .8, ez);
+  A($('wk'), kf, T - .24, .8, ez);
+});
+
+/* ---------- timeline ---------- */
+var scenes = Array.prototype.map.call(document.querySelectorAll('.scene'), function(el, k){
+  var s = [0, 5, 13, 24, 33, 43, 51, 57][k], e = [5, 13, 24, 33, 43, 51, 57, 60][k];
+  return {el:el, s:s, e:e};
+});
+var grain = $('grain'), fillEl = $('fill'), knob = $('knob'), timeEl = $('time');
+function mmss(x){ x = Math.max(0, Math.floor(x + .0001)); return Math.floor(x / 60) + ':' + ('0' + (x % 60)).slice(-2); }
+function render(t, showUI){
+  scenes.forEach(function(sc){
+    var on = t >= sc.s && (t < sc.e || (sc.e === DUR && t >= DUR));
+    var v = on ? 'block' : 'none';
+    if (sc.el.style.display !== v) sc.el.style.display = v;
+  });
+  var ms = t * 1000;
+  for (var k = 0; k < anims.length; k++) anims[k].currentTime = ms;
+  for (k = 0; k < counters.length; k++){
+    var c = counters[k], p = (t - c.t0) / c.d;
+    p = p <= 0 ? 0 : p >= 1 ? 1 : p;
+    if (RM) p = t >= c.t0 ? 1 : 0;
+    var ez = 1 - Math.pow(1 - p, 3);
+    var txt = c.f(c.a + (c.b - c.a) * ez);
+    if (c.el.textContent !== txt) c.el.textContent = txt;
+  }
+  if (!RM){ var f = Math.floor(t * 12); grain.style.transform = 'translate(' + ((f * 37) % 90 - 45) + 'px,' + ((f * 53) % 90 - 45) + 'px)'; }
+  if (showUI !== false){
+    var pr = Math.min(1, t / DUR) * 100;
+    fillEl.style.width = pr + '%'; knob.style.left = pr + '%';
+    timeEl.textContent = mmss(t) + ' / ' + mmss(DUR);
+  }
+}
+
+var t = 0, playing = false, started = false, last = 0;
+var ovStart = $('ovStart'), ovEnd = $('ovEnd');
+function setIcon(){
+  $('icPlay').innerHTML = playing ? '<path d="M6 4h4v16H6zM14 4h4v16h-4z"/>' : '<path d="M6 4l14 8-14 8z"/>';
+  $('bPlay').setAttribute('aria-label', playing ? 'Pausar' : 'Play');
+}
+function loop(now){
+  if (!playing) return;
+  var dt = Math.min(.1, (now - last) / 1000); last = now;
+  t += dt;
+  if (t >= DUR){ t = DUR; playing = false; render(t); ovEnd.hidden = false; setIcon(); return; }
+  render(t);
+  requestAnimationFrame(loop);
+}
+function play(){
+  if (!started){ started = true; t = 0; }
+  if (t >= DUR) t = 0;
+  ovStart.hidden = true; ovEnd.hidden = true;
+  playing = true; last = performance.now(); setIcon();
+  requestAnimationFrame(loop);
+}
+function pause(){ playing = false; setIcon(); }
+function toggle(){ if (playing) pause(); else play(); }
+function restart(){ started = true; t = 0; render(0); play(); }
+
+$('btnStart').addEventListener('click', play);
+$('btnAgain').addEventListener('click', restart);
+$('bPlay').addEventListener('click', toggle);
+$('bRe').addEventListener('click', restart);
+document.addEventListener('keydown', function(e){
+  if (e.code === 'Space' || e.key === ' '){ e.preventDefault(); if (e.target && e.target.blur) e.target.blur(); if (!e.repeat) toggle(); }
+});
+document.addEventListener('keyup', function(e){ if (e.code === 'Space' || e.key === ' ') e.preventDefault(); });
+
+/* scrub */
+var track = $('track'), dragging = false;
+CUTS.forEach(function(T){ var tk = document.createElement('div'); tk.className = 'tick'; tk.style.left = (T / DUR * 100) + '%'; track.appendChild(tk); });
+function seekFromEvent(e){
+  var r = track.getBoundingClientRect();
+  var p = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width));
+  t = p * DUR; started = true; ovStart.hidden = true;
+  ovEnd.hidden = t < DUR;
+  render(t);
+}
+track.addEventListener('pointerdown', function(e){ dragging = true; track.setPointerCapture(e.pointerId); seekFromEvent(e); });
+track.addEventListener('pointermove', function(e){ if (dragging) seekFromEvent(e); });
+track.addEventListener('pointerup', function(){ dragging = false; });
+track.addEventListener('pointercancel', function(){ dragging = false; });
+
+/* fit stage */
+var view = $('view'), stage = $('stage');
+function fit(){
+  var w = view.clientWidth, h = view.clientHeight, s = Math.min(w / 1920, h / 1080);
+  stage.style.transform = 'translate(' + ((w - 1920 * s) / 2) + 'px,' + ((h - 1080 * s) / 2) + 'px) scale(' + s + ')';
+}
+window.addEventListener('resize', fit);
+if (window.ResizeObserver) new ResizeObserver(fit).observe(view);
+fit();
+
+/* poster frame behind the start button */
+render(POSTER, false);
+timeEl.textContent = '0:00 / ' + mmss(DUR);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ if (!started) render(POSTER, false); });
+})();
+</script>
+</body>
+</html>

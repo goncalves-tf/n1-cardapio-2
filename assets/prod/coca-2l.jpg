@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Error><Code>AccessDenied</Code><Message>User: arn:aws:iam::378497029709:user/im-akamai is not authorized to perform: s3:ListBucket on resource: "arn:aws:s3:::static.ifood.com.br" because no identity-based policy allows the s3:ListBucket action</Message><RequestId>9E6AN8TQEW7B6GK9</RequestId><HostId>w02VOn12SSs/s7Ud8nSxOem15YSQqLp1iEQqv/AjdGT0/gzmqn3lsZe62aBHmvXfyaJl01I54hU=</HostId></Error>
