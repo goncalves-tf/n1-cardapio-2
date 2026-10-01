@@ -22,7 +22,7 @@
     const pp = it.pp ? `<span class="pp">${brl(it.preco / it.pp)} por pessoa</span>` : '';
     const own = `<span class="ownv" style="display:${owner ? 'block' : 'none'};font-size:11px;font-weight:800;color:${cmv > 33 ? '#b3261e' : '#0a8f3c'};margin-top:4px">CMV ${pct(cmv)} · margem ${brl(mg)}</span>`;
     return `<button class="card" data-id="${it.id}">
-      <div class="tx">${it.rank ? `<div class="rk">🔥 ${it.rank}</div>` : ''}${it.selo ? `<span class="sl">${it.selo}</span>` : ''}
+      <div class="tx">${it.ml ? '<span class="ml">MAIS VENDIDO</span>' : ''}${it.rank ? `<div class="rk">🔥 ${it.rank}</div>` : ''}${it.selo ? `<span class="sl">${it.selo}</span>` : ''}
         <div class="nm">${it.nome}</div><div class="ds">${it.desc}</div>
         ${it.tam ? `<div class="tm">${it.tam}</div>` : ''}
         <div class="pr"><b>${it.tam ? 'a partir de ' : ''}${brl(it.preco)}</b>${eco}${pp}</div>${own}</div>
@@ -66,7 +66,7 @@
       pn.innerHTML = `<div class="hd"><img src="assets/prod/${it.img}.jpg" alt=""><button class="x" data-close>✕</button></div>
       <div class="bd"><h6>${it.nome}</h6><div class="d">${it.desc}</div>
       <div class="pv">${brl(it.preco)} ${it.de ? `<s style="color:#999;font-size:13px">${brl(it.de)}</s><span class="ec" style="font-size:12px;color:#0a8f3c;background:#e6f6ec;padding:2px 6px;border-radius:6px">economize ${brl(it.de - it.preco)}</span>` : ''}</div>
-      ${ups.length ? `<div class="grp"><div class="gt">Turbine seu pedido <span>preço de combo</span></div>
+      ${ups.length ? `<div class="grp"><div class="gt">${it.up.includes('kit') ? 'Quem pediu, também levou <span>compre junto</span>' : 'Turbine seu pedido <span>preço de combo</span>'}</div>
       ${ups.map(u => `<div class="opt ${sel.has(u.k) ? 'on' : ''}" data-k="${u.k}"><span class="ck"></span><span class="on2">${u.nome}<small>avulso ${brl(u.de)} · aqui você economiza ${brl(u.de - u.preco)}</small></span><span class="pz">+ ${brl(u.preco)}</span></div>`).join('')}</div>` : ''}
       ${owner ? `<div style="margin-top:12px;font-size:12px;font-weight:800;color:#0a8f3c">Modo dono: CMV ${pct(custo / total * 100)} · margem ${brl(total - custo)}</div>` : ''}
       </div><div class="add"><button id="addB"><span>Adicionar</span><span>${brl(total)}</span></button></div>`;

@@ -243,13 +243,13 @@ img{display:block}
 
 <!-- 5 -->
 <section class="scene" id="s5">
-  <div class="s5-h h" id="s5h">Vira Trio por <em>+ R$ 13</em></div>
+  <div class="s5-h h" id="s5h">Compre <em>junto</em></div>
   <div class="s5-card stk" id="s5card">
-    <img class="ph" src="assets/prod/chicken-burger.jpg" alt="">
+    <img class="ph" src="assets/prod/dois-burgers.jpg" alt="">
     <img class="ph s5-trio" id="s5trio" src="assets/prod/trio-burger.jpg" alt="">
     <div class="s5-chip" id="s5chip">
-      <div class="lb ds"><span id="lbA">Chicken Burger</span><span id="lbB">Trio Burger</span></div>
-      <div class="pz h" id="s5p">R$ 31,90</div>
+      <div class="lb ds"><span id="lbA">2 Burguers</span><span id="lbB">+ batata e Coca</span></div>
+      <div class="pz h" id="s5p">R$ 44,90</div>
     </div>
   </div>
   <div class="fly" id="fb" style="left:830px;top:250px"><img class="ph" src="assets/prod/batata.jpg" alt=""></div>
@@ -258,28 +258,28 @@ img{display:block}
   <div class="fly-t ds" id="fct" style="left:920px;top:905px">+ coca</div>
   <div class="s5-r">
     <div class="lb ds" id="s5l">Margem por pedido</div>
-    <div class="big h" id="s5m">R$ 24,87</div>
+    <div class="big h" id="s5m">R$ 30,77</div>
     <div class="meter" id="s5met"><div id="s5fill"></div></div>
   </div>
   <div class="s5-selo stk" id="s5selo">
-    <div class="h">+ R$ 7,24</div>
-    <div class="ds">de margem por pedido</div>
+    <div class="h">+ R$ 9,24</div>
+    <div class="ds">o que 84% dos pedidos não levam</div>
   </div>
 </section>
 
 <!-- 6 -->
 <section class="scene" id="s6">
-  <div class="s6-h h" id="s6h">Adicional no item certo.</div>
+  <div class="s6-h h" id="s6h">Mais vendido. Com número.</div>
   <div class="s6-card stk" id="s6card">
     <div class="pic"><img class="ph" id="s6img" src="assets/prod/dois-burgers.jpg" alt=""></div>
     <div class="txt">
-      <div class="nm ds" id="s6nm">2 Burguers + batata e Coca</div>
-      <div class="s6-old" id="s6old">Hoje R$ 44,90<i id="s6strike" style="display:none"></i></div>
-      <div class="s6-new h" id="s6new">R$ 44,90</div>
+      <div class="nm ds" id="s6nm">2 Burguers com Desconto</div>
+      <div class="s6-old" id="s6old">em 30 dias:<i id="s6strike" style="display:none"></i></div>
+      <div class="s6-new h" id="s6new">0</div>
     </div>
-    <div class="s6-tag stk h" id="s6tag">+ R$ 9,24 de margem por aceite</div>
+    <div class="s6-tag stk h" id="s6tag">MAIS VENDIDO, como no Mercado Livre</div>
   </div>
-  <div class="s6-cmv ds" id="s6cmv">Com 20% de aceite no #1 da marca: <b id="s6c">R$ 0,0 mil</b> de margem em 30 dias</div>
+  <div class="s6-cmv ds" id="s6cmv">Selo e número recalculados a cada <b id="s6c">0</b> dias pelo BI</div>
 </section>
 
 <!-- 7 -->
@@ -508,8 +508,8 @@ A($('fbt'), [{opacity:1}, {opacity:0}], 37.2, .2);
 A($('fct'), [{opacity:1}, {opacity:0}], 37.2, .2);
 A($('s5trio'), [{clipPath:'circle(0% at 70% 50%)'}, {clipPath:'circle(85% at 50% 50%)'}], 37.55, .6);
 A($('s5card'), [{transform:'translateX(0px) rotate(0deg) scale(1)'}, {transform:'translateX(0px) rotate(-1.5deg) scale(1.05)'}, {transform:'translateX(0px) rotate(0deg) scale(1)'}], 37.55, .6, {ease:'ease-out'});
-C($('s5p'), 31.9, 44.9, 37.7, .9, brl);
-C($('s5m'), 24.87, 32.11, 38.5, 1.6, brl);
+C($('s5p'), 44.9, 59.8, 37.7, .9, brl);
+C($('s5m'), 30.77, 40.01, 38.5, 1.6, brl);
 A($('s5fill'), [{transform:'scaleX(.775)'}, {transform:'scaleX(1)'}], 38.5, 1.6);
 A($('s5m'), [{color:'#141414'}, {color:'#FF0000'}], 40.0, .3);
 A($('s5selo'), popKF(-4), 40.35, .9, L);
@@ -522,10 +522,10 @@ up($('s6nm'), 44.2, .6, 30);
 up($('s6old'), 44.4, .6, 30);
 up($('s6new'), 44.6, .7, 50);
 A($('s6strike'), [{transform:'scaleX(0)'}, {transform:'scaleX(1)'}], 45.25, .45);
-C($('s6new'), 44.9, 59.8, 45.35, 1.1, brl);
+C($('s6new'), 0, 10718, 45.35, 1.1, int);
 A($('s6tag'), popKF(-5), 46.55, .9, L);
 up($('s6cmv'), 47.5, .6, 30);
-C($('s6c'), 0, 19.8, 47.6, 1.1, function(v){ return 'R$ ' + v.toFixed(1).replace('.', ',') + ' mil'; });
+C($('s6c'), 0, 30, 47.6, 1.1, int);
 
 /* ---------- SCENE 7 (51 a 57) ---------- */
 reveal($('s7h'), 51.15, .1, .75);

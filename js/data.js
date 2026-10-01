@@ -12,6 +12,7 @@ window.N1 = {
   extras: {
     trio: { nome: 'Vira Trio: batata individual + Coca lata', preco: 13.00, custo: 5.34, de: 23.80 },
     trioCaixa: { nome: 'Vira Trio: purê + Coca lata', preco: 18.00, custo: 7.09, de: 26.80 },
+    kit: { nome: 'Batata frita + Coca lata', preco: 14.90, custo: 5.66, de: 20.99 },
     batata: { nome: 'Batata frita individual', preco: 9.90, custo: 2.02, de: 11.90 },
     coca: { nome: 'Coca-Cola lata', preco: 9.90, custo: 3.64, de: 11.90 },
     molho: { nome: 'Molho no potinho (verde, alho, bacon, barbecue)', preco: 5.90, custo: 1.87, de: 8.90 },
@@ -31,7 +32,7 @@ window.N1 = {
   ],
   itens: [
     // Mais pedidos: ranking real do BI (quantidade vendida em 30 dias)
-    { id: 'dois', cat: 'top', nome: '2 Burguers com Desconto', img: 'dois-burgers', preco: 49.90, custo: 14.13, de: 63.80, rank: '#1 da marca · 10.718 vendidos em 30 dias', desc: 'Dois burgers de frango frito crocante no pão brioche. Você escolhe os sabores.', up: ['batata', 'coca', 'molho', 'brig'] },
+    { id: 'dois', cat: 'top', nome: '2 Burguers com Desconto', img: 'dois-burgers', preco: 49.90, custo: 14.13, de: 63.80, rank: '+10 mil vendidos em 30 dias · 1º da N1', ml: true, desc: 'Dois burgers de frango frito crocante no pão brioche. Você escolhe os sabores.', up: ['kit', 'molho', 'brig'] },
     { id: 'combom', cat: 'top', nome: 'Combo M · 2 a 3 pessoas', img: 'combo-m', preco: 79.90, custo: 24.57, de: 100.70, rank: '#2 da marca · 4.755 vendidos em 30 dias', desc: 'Caixa M de frango frito + 1 acompanhamento Super + 1 molho.', up: ['coca', 'molho', 'brig'] },
     { id: 'combop', cat: 'top', nome: 'Combo P · 1 a 2 pessoas', img: 'combo-p', preco: 55.90, custo: 17.39, de: 75.70, rank: '#3 da marca · 4.251 vendidos em 30 dias', desc: 'Caixa P de frango frito + 1 acompanhamento Super + 1 molho.', up: ['coca', 'molho', 'brig'] },
     { id: 'bitesm', cat: 'top', nome: 'Chicken Bites M', img: 'bites-m', preco: 52.90, custo: 15.13, rank: '#4 da marca · 3.293 vendidos em 30 dias', desc: 'Cubinhos de peito de frango frito crocante, marinados com o tempero N1.', up: ['batata', 'coca', 'molho'] },
@@ -41,7 +42,7 @@ window.N1 = {
     { id: 'triocp', cat: 'solo', nome: 'Trio Caixa P', img: 'trio-caixa-p', preco: 49.90, custo: 16.05, de: 58.70, desc: 'Caixa P (275 g de tiras) + purê de batatas + Coca lata.', up: ['molho', 'brig'] },
     { id: 'bitesp', cat: 'solo', nome: 'Chicken Bites P', img: 'bites-p', preco: 28.90, custo: 8.44, rank: '#5 da marca · 3.156 vendidos', desc: 'A porção individual dos cubinhos crocantes.', up: ['batata', 'coca', 'molho'] },
     // Pra 2 pessoas
-    { id: 'dois2', ref: 'dois', cat: 'dupla', nome: '2 Burguers com Desconto', img: 'dois-burgers', preco: 49.90, custo: 14.13, de: 63.80, selo: 'Mais pedido', desc: 'Dois burgers de frango frito crocante no pão brioche.', up: ['batata', 'coca', 'molho', 'brig'] },
+    { id: 'dois2', ref: 'dois', cat: 'dupla', nome: '2 Burguers com Desconto', img: 'dois-burgers', preco: 49.90, custo: 14.13, de: 63.80, ml: true, desc: 'Dois burgers de frango frito crocante no pão brioche.', up: ['kit', 'molho', 'brig'] },
     { id: 'doiscocas', cat: 'dupla', nome: '2 Burgers + 2 Cocas', img: 'dois-burgers-cocas', preco: 59.90, custo: 20.76, de: 87.60, desc: 'Dois burgers + duas Coca lata. Por mais R$ 10 que a dupla simples.', up: ['batata', 'molho', 'brig'] },
     { id: 'combop2', ref: 'combop', cat: 'dupla', nome: 'Combo P · 1 a 2 pessoas', img: 'combo-p', preco: 55.90, custo: 17.39, de: 75.70, desc: 'Caixa P + 1 acompanhamento Super + 1 molho.', up: ['coca', 'molho', 'brig'] },
     // Pra 3 ou mais

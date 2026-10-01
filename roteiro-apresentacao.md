@@ -1,19 +1,18 @@
-# Roteiro da apresentação: Cardápio N1 2.0 (3 minutos)
+# Roteiro de sexta: Cardápio N1 2.0 (3 minutos)
 
-Abrir: dois cliques em `abrir-site.bat`. Navegar com ↓ e ↑.
+Abrir: https://goncalves-tf.github.io/n1-cardapio-2/ (ou `abrir-site.bat`). Navegar com ↓ e ↑.
 
-1. **Topo (10 s):** "Escolhi a N1. Mesma cozinha, mesmo frango, cardápio novo."
-2. **Tese (20 s):** "52.049 pedidos no iFood em 30 dias, ticket de R$ 61,16. 88,4% dos pedidos saem sem nenhum extra. O cliente já chega com fome e a gente não oferece nada a mais."
-3. **Filme (opcional, 60 s):** dá play se tiver tempo. Senão pula.
-4. **Vazamentos (30 s):** "Trio Caixa M a R$ 76,90 tem CMV de 37%, o pior do cardápio, e canibaliza o Combo M. Nenhum combo mostra a economia. O app vende o Executivo a R$ 37,70 quando a planilha manda R$ 44,90."
-5. **Cardápio novo (40 s):** abre o Chicken Burguer no celular, marca "Vira Trio + R$ 13" e o molho. Liga o Modo dono: "burger sozinho deixa R$ 24,87 de margem, virando trio deixa R$ 32,11."
-6. **Antes e depois (15 s):** "47 itens viram 39, a navegação começa pela ocasião, todo combo mostra a economia."
-7. **Simulador (20 s):** "Com as metas do teste, o ticket vai de R$ 61,16 para R$ 63,24, cerca de R$ 73 mil de margem a mais por mês, já descontando quem comprava o extra."
-8. **Teste (15 s):** "Nada disso vira a rede no achismo. Teste A/B de 14 dias: 38 lojas com o novo, 37 com o atual. Conversão é a métrica principal: tem que subir ou empatar."
+1. **Tese (20 s):** "O nº 1 da N1 é o 2 Burguers com Desconto: 10.718 vendidos em 30 dias. E 84% desses pedidos saem sem nada junto."
+2. **Vazamentos iFood (30 s):** "Li o portal da loja de Vitória. O upsell existe em 6 grupos, mas não no item que mais vende. O primeiro item da loja é um cupom de R$ 0,01 que pede para não comprar. E o kit de 4 maioneses tem CMV de até 50%."
+3. **Mercado Livre (40 s):** "O Mercado Livre já resolveu isso com dois selos. Mais vendido, com número: 10.718 vendidos. E compre junto, escolhido pelo dado: quem leva algo junto com o nº 1 leva batata e Coca. Então o adicional do nº 1 é batata + Coca por R$ 14,90, um kit que já existe no cardápio."
+4. **Cardápio novo (30 s):** abre o 2 Burguers no celular, mostra o selo MAIS VENDIDO e marca "Quem pediu, também levou".
+5. **Números (20 s):** "Cada aceite rende R$ 9,24 de margem. Com 20% de aceite são R$ 19,8 mil em 30 dias, só no nº 1."
+6. **Teste (15 s):** "Nada vira a rede no achismo: teste de 14 dias, metade das lojas. Conversão tem que subir ou empatar."
+7. **Fecho (5 s):** "Nenhum insumo novo. Nenhum item novo. Só mostrar o que o BI já sabe."
 
 ## Perguntas prováveis
 
-1. **"De onde vêm os números?"** BI Tastefy (30/08 a 28/09/2026) e planilha CMV 2026 · NOVA OPERAÇÃO.
-2. **"E a conversão?"** O BI não mede funil hoje. O teste mede pelo funil do Portal do Parceiro iFood.
-3. **"Precisa de insumo novo?"** Não. Todos os 39 itens já existem na operação.
-4. **"As metas de extra são reais?"** São metas do teste, não promessa. O teste confirma ou derruba cada uma.
+1. **"De onde vêm os números?"** BI Tastefy (pedidos concluídos da N1, 30/08 a 28/09/2026) e planilha CMV 2026, aba Precificação N1.
+2. **"O iFood deixa mostrar 'mais vendido'?"** O selo laranja não existe no iFood. Lá entra como item no topo e primeira linha da descrição. No app próprio vira selo de verdade.
+3. **"E a conversão?"** O BI não mede funil. O teste mede pelo funil do Portal do Parceiro iFood.
+4. **"Por que batata e Coca?"** Porque é o que quem compra o nº 1 já leva junto: batata 236 pedidos, Coca 324.
