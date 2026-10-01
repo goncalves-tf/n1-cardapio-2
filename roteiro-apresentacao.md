@@ -3,8 +3,8 @@
 Abrir: https://goncalves-tf.github.io/n1-cardapio-2/ (ou `abrir-site.bat`). Navegar com ↓ e ↑.
 
 1. **Tese (20 s):** "O nº 1 da N1 é o 2 Burguers com Desconto: 10.718 vendidos em 30 dias. E 84% desses pedidos saem sem nada junto."
-2. **Vazamentos iFood (30 s):** "Li o portal da loja de Vitória. O upsell existe em 6 grupos, mas não no item que mais vende. O primeiro item da loja é um cupom de R$ 0,01 que pede para não comprar. E o kit de 4 maioneses tem CMV de até 50%."
-3. **Mercado Livre (40 s):** "O Mercado Livre já resolveu isso com dois selos. Mais vendido, com número: 10.718 vendidos. E compre junto, escolhido pelo dado: quem leva algo junto com o nº 1 leva batata e Coca. Então o adicional do nº 1 é batata + Coca por R$ 14,90, um kit que já existe no cardápio."
+2. **Vazamentos iFood (30 s):** "Li o portal da loja de Vitória. O upsell existe em 6 grupos, mas não no item que mais vende. O primeiro item da loja é um cupom de R$ 0,01 que pede para não comprar. E o kit de 4 maioneses tem CMV de até 50%: a R$ 19,90 cai para 38%."
+3. **Mercado Livre (40 s):** "O Mercado Livre já resolveu isso com dois selos. Mais vendido, com número: no app próprio, selo e 10.718 vendidos; no iFood, categoria Mais pedidos no topo. E compre junto, escolhido pelo dado: quem leva algo junto com o nº 1 leva batata e Coca. Então o adicional do nº 1 é batata + Coca por R$ 14,90, um kit que já existe no cardápio."
 4. **Cardápio novo (30 s):** abre o 2 Burguers no celular, mostra o selo MAIS VENDIDO e marca "Quem pediu, também levou".
 5. **Números (20 s):** "Cada aceite rende R$ 9,24 de margem. Com 20% de aceite são R$ 19,8 mil em 30 dias, só no nº 1."
 6. **Teste (15 s):** "Nada vira a rede no achismo: teste de 14 dias, metade das lojas. Conversão tem que subir ou empatar."
@@ -13,6 +13,6 @@ Abrir: https://goncalves-tf.github.io/n1-cardapio-2/ (ou `abrir-site.bat`). Nave
 ## Perguntas prováveis
 
 1. **"De onde vêm os números?"** BI Tastefy (pedidos concluídos da N1, 30/08 a 28/09/2026) e planilha CMV 2026, aba Precificação N1.
-2. **"O iFood deixa mostrar 'mais vendido'?"** O selo laranja não existe no iFood. Lá entra como item no topo e primeira linha da descrição. No app próprio vira selo de verdade.
+2. **"O iFood deixa mostrar 'mais vendido'?"** Não. No iFood entra só a categoria "Mais pedidos" no topo. Selo e número de vendidos são do app próprio.
 3. **"E a conversão?"** O BI não mede funil. O teste mede pelo funil do Portal do Parceiro iFood.
 4. **"Por que batata e Coca?"** Porque é o que quem compra o nº 1 já leva junto: batata 236 pedidos, Coca 324.

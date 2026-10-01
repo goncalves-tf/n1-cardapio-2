@@ -88,7 +88,7 @@ img{display:block}
 .s5-card .ph{position:absolute;inset:0}
 .s5-trio{clip-path:circle(0% at 70% 50%)}
 .s5-chip{position:absolute;left:30px;bottom:30px;background:var(--k);color:var(--y);padding:14px 30px 18px;border-radius:22px;border:5px solid var(--k)}
-.s5-chip .lb{height:44px;overflow:hidden;position:relative;font-size:38px;color:var(--c)}
+.s5-chip .lb{height:44px;width:600px;overflow:hidden;position:relative;font-size:38px;color:var(--c)}
 .s5-chip .lb span{position:absolute;left:0;top:0;white-space:nowrap}
 .s5-chip .pz{font-size:92px}
 .fly{position:absolute;width:300px;height:300px;border-radius:50%;overflow:hidden;border:6px solid var(--k);box-shadow:8px 8px 0 var(--k);background:var(--y);z-index:4}
@@ -248,7 +248,7 @@ img{display:block}
     <img class="ph" src="assets/prod/dois-burgers.jpg" alt="">
     <img class="ph s5-trio" id="s5trio" src="assets/prod/trio-burger.jpg" alt="">
     <div class="s5-chip" id="s5chip">
-      <div class="lb ds"><span id="lbA">2 Burguers</span><span id="lbB">+ batata e Coca</span></div>
+      <div class="lb ds"><span id="lbA">2 Burguers</span><span id="lbB">2 Burguers + batata e Coca</span></div>
       <div class="pz h" id="s5p">R$ 44,90</div>
     </div>
   </div>
@@ -257,13 +257,13 @@ img{display:block}
   <div class="fly" id="fc" style="left:830px;top:640px"><img class="ph" src="assets/prod/coca.jpg" alt=""></div>
   <div class="fly-t ds" id="fct" style="left:920px;top:905px">+ coca</div>
   <div class="s5-r">
-    <div class="lb ds" id="s5l">Margem por pedido</div>
-    <div class="big h" id="s5m">R$ 30,77</div>
+    <div class="lb ds" id="s5l">A N1 ganha a mais por pedido</div>
+    <div class="big h" id="s5m">R$ 0,00</div>
     <div class="meter" id="s5met"><div id="s5fill"></div></div>
   </div>
   <div class="s5-selo stk" id="s5selo">
-    <div class="h">+ R$ 9,24</div>
-    <div class="ds">o que 84% dos pedidos não levam</div>
+    <div class="h">84%</div>
+    <div class="ds">dos pedidos do nº 1 saem sem isso hoje</div>
   </div>
 </section>
 
@@ -279,7 +279,7 @@ img{display:block}
     </div>
     <div class="s6-tag stk h" id="s6tag">MAIS VENDIDO, como no Mercado Livre</div>
   </div>
-  <div class="s6-cmv ds" id="s6cmv">Selo e número recalculados a cada <b id="s6c">0</b> dias pelo BI</div>
+  <div class="s6-cmv ds" id="s6cmv">No app próprio, recalculado a cada <b id="s6c">0</b> dias pelo BI</div>
 </section>
 
 <!-- 7 -->
@@ -509,7 +509,7 @@ A($('fct'), [{opacity:1}, {opacity:0}], 37.2, .2);
 A($('s5trio'), [{clipPath:'circle(0% at 70% 50%)'}, {clipPath:'circle(85% at 50% 50%)'}], 37.55, .6);
 A($('s5card'), [{transform:'translateX(0px) rotate(0deg) scale(1)'}, {transform:'translateX(0px) rotate(-1.5deg) scale(1.05)'}, {transform:'translateX(0px) rotate(0deg) scale(1)'}], 37.55, .6, {ease:'ease-out'});
 C($('s5p'), 44.9, 59.8, 37.7, .9, brl);
-C($('s5m'), 30.77, 40.01, 38.5, 1.6, brl);
+C($('s5m'), 0, 9.24, 38.5, 1.6, brl);
 A($('s5fill'), [{transform:'scaleX(.775)'}, {transform:'scaleX(1)'}], 38.5, 1.6);
 A($('s5m'), [{color:'#141414'}, {color:'#FF0000'}], 40.0, .3);
 A($('s5selo'), popKF(-4), 40.35, .9, L);
