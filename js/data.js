@@ -87,3 +87,42 @@ window.N1 = {
     { id: 'coca2', cat: 'doces', nome: 'Coca-Cola grande', img: 'coca-zero', preco: 23.90, custo: 9.91, tam: 'Normal ou sem açúcar', desc: '1,5 L ou 2 L conforme a região.', up: [] }
   ]
 };
+
+// "Quem pediu, também levou" (só no app próprio): os 2 itens que mais saem junto com cada produto.
+// Fonte: BI Tastefy, vps_fato.itens_pedidos, N1, pedidos concluídos de 30/08 a 28/09/2026.
+// n = pedidos com os dois itens juntos. Coca soma normal e sem açúcar. Molhos soma Maioneses e Molhos Extras.
+window.N1.junto = {
+  dois: [{ id: 'coca', n: 324 }, { id: 'batata', n: 236 }],
+  combom: [{ id: 'molhos', n: 377 }, { id: 'coca', n: 164 }],
+  combop: [{ id: 'coca', n: 203 }, { id: 'molhos', n: 123 }],
+  bitesm: [{ id: 'molhos', n: 136 }, { id: 'batata', n: 134 }],
+  bitesp: [{ id: 'molhos', n: 125 }, { id: 'batata', n: 120 }],
+  trio: [{ id: 'molhos', n: 43 }, { id: 'bitesp', n: 17 }],
+  super: [{ id: 'molhos', n: 46 }, { id: 'dois', n: 18 }],
+  combog: [{ id: 'coca', n: 53 }, { id: 'molhos', n: 43 }],
+  combogg: [{ id: 'coca', n: 10 }, { id: 'arroz', n: 4 }],
+  bbq: [{ id: 'coca', n: 6 }, { id: 'ob', n: 6 }],
+  cb: [{ id: 'coca', n: 81 }, { id: 'batata', n: 35 }],
+  cs: [{ id: 'batata', n: 60 }, { id: 'molhos', n: 37 }],
+  gb: [{ id: 'coca', n: 55 }, { id: 'batata', n: 25 }],
+  ob: [{ id: 'batata', n: 16 }, { id: 'molhos', n: 13 }],
+  bbc: [{ id: 'batata', n: 11 }, { id: 'combop', n: 6 }],
+  cxp: [{ id: 'batata', n: 51 }, { id: 'molhos', n: 48 }],
+  cxm: [{ id: 'molhos', n: 30 }, { id: 'coca', n: 27 }],
+  cxg: [{ id: 'batata', n: 18 }, { id: 'dois', n: 16 }],
+  trad: [{ id: 'molhos', n: 26 }, { id: 'parm', n: 10 }],
+  estrog: [{ id: 'coca', n: 16 }, { id: 'batata', n: 9 }],
+  parm: [{ id: 'brig', n: 7 }, { id: 'bitesp', n: 7 }],
+  frsal: [{ id: 'trio', n: 4 }, { id: 'trad', n: 3 }],
+  fric: [{ id: 'batata', n: 6 }, { id: 'coca', n: 4 }],
+  batata: [{ id: 'dois', n: 236 }, { id: 'bitesm', n: 134 }],
+  molhos: [{ id: 'combom', n: 242 }, { id: 'bitesm', n: 136 }],
+  onion: [{ id: 'combom', n: 67 }, { id: 'batata', n: 54 }],
+  aipim: [{ id: 'batata', n: 41 }, { id: 'bitesm', n: 32 }],
+  arroz: [{ id: 'combom', n: 43 }, { id: 'combop', n: 37 }],
+  salada: [{ id: 'arroz', n: 27 }, { id: 'batata', n: 14 }],
+  cheddar: [{ id: 'bitesm', n: 20 }, { id: 'dois', n: 11 }],
+  brig: [{ id: 'dois', n: 18 }, { id: 'bitesp', n: 17 }],
+  churros: [{ id: 'dois', n: 36 }, { id: 'molhos', n: 23 }],
+  coca: [{ id: 'dois', n: 324 }, { id: 'combop', n: 203 }]
+};

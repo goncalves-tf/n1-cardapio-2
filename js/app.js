@@ -57,19 +57,24 @@
   const cart = [];
   function openItem(id) {
     const it = D.itens.find(i => i.id === id);
-    whyNow.textContent = (it.up||[]).includes('trio') ? 'Vira Trio por + R$ 13: burger avulso deixa R$ 24,87 de margem, o trio deixa R$ 32,11.' : (it.up||[]).length ? 'Complementos com preço de combo: o extra aparece na hora da decisão, não lá embaixo do cardápio.' : D.cats.find(c => c.id === it.cat).nota;
+    const jt = ((D.junto || {})[it.ref || it.id] || []).map(j => ({ ...j, x: D.itens.find(i => i.id === j.id) })).filter(j => j.x);
+    const selJ = new Set();
+    whyNow.textContent = jt.length ? 'Só no app próprio: ao abrir o item, aparecem primeiro os 2 itens que mais saem junto com ele, direto do BI.' : (it.up||[]).includes('trio') ? 'Vira Trio por + R$ 13: burger avulso deixa R$ 24,87 de margem, o trio deixa R$ 32,11.' : (it.up||[]).length ? 'Complementos com preço de combo: o extra aparece na hora da decisão, não lá embaixo do cardápio.' : D.cats.find(c => c.id === it.cat).nota;
     const sel = new Set();
     const ups = (it.up || []).map(k => ({ k, ...D.extras[k] }));
     const draw = () => {
       let total = it.preco, custo = it.custo;
       ups.forEach(u => { if (sel.has(u.k)) { total += u.preco; custo += u.custo; } });
+      jt.forEach(j => { if (selJ.has(j.id)) { total += j.x.preco; custo += j.x.custo; } });
       pn.innerHTML = `<div class="hd"><img src="assets/prod/${it.img}.jpg" alt=""><button class="x" data-close>✕</button></div>
       <div class="bd"><h6>${it.nome}</h6><div class="d">${it.desc}</div>
       <div class="pv">${brl(it.preco)} ${it.de ? `<s style="color:#999;font-size:13px">${brl(it.de)}</s><span class="ec" style="font-size:12px;color:#0a8f3c;background:#e6f6ec;padding:2px 6px;border-radius:6px">economize ${brl(it.de - it.preco)}</span>` : ''}</div>
-      ${ups.length ? `<div class="grp"><div class="gt">${it.up.includes('kit') ? 'Quem pediu, também levou <span>compre junto</span>' : 'Turbine seu pedido <span>preço de combo</span>'}</div>
+      ${jt.length ? `<div class="qj"><div class="qjh">Quem pediu, também levou <span>só no app próprio</span></div><div class="qjr">${jt.map(j => `<button class="qjc ${selJ.has(j.id) ? 'on' : ''}" data-j="${j.id}"><img src="assets/prod/${j.x.img}.jpg" alt=""><b>${j.x.nome}</b><small>${j.n.toLocaleString('pt-BR')} pedidos levaram junto</small><em>${selJ.has(j.id) ? '✓ adicionado' : '+ ' + brl(j.x.preco)}</em></button>`).join('')}</div></div>` : ''}
+      ${ups.length ? `<div class="grp"><div class="gt">Turbine seu pedido <span>preço de combo</span></div>
       ${ups.map(u => `<div class="opt ${sel.has(u.k) ? 'on' : ''}" data-k="${u.k}"><span class="ck"></span><span class="on2">${u.nome}<small>avulso ${brl(u.de)} · aqui você economiza ${brl(u.de - u.preco)}</small></span><span class="pz">+ ${brl(u.preco)}</span></div>`).join('')}</div>` : ''}
       ${owner ? `<div style="margin-top:12px;font-size:12px;font-weight:800;color:#0a8f3c">Modo dono: CMV ${pct(custo / total * 100)} · margem ${brl(total - custo)}</div>` : ''}
       </div><div class="add"><button id="addB"><span>Adicionar</span><span>${brl(total)}</span></button></div>`;
+      $$('.qjc', pn).forEach(o => o.onclick = () => { selJ.has(o.dataset.j) ? selJ.delete(o.dataset.j) : selJ.add(o.dataset.j); const st = pn.scrollTop; draw(); pn.scrollTop = st; });
       $$('.opt', pn).forEach(o => o.onclick = () => { sel.has(o.dataset.k) ? sel.delete(o.dataset.k) : sel.add(o.dataset.k); const st = pn.scrollTop; draw(); pn.scrollTop = st; });
       $('#addB', pn).onclick = () => { cart.push({ total, custo }); closeSheet(); drawCart(); };
       $$('[data-close]', pn).forEach(x => x.onclick = closeSheet);
@@ -97,7 +102,7 @@
     { h: 'Pra 2 pessoas', s: 'o #1 da marca na porta', ids: ['dois2', 'doiscocas', 'super'], star: 'dois2' },
     { h: 'Pra 3 ou mais', s: 'menor preço por pessoa', ids: ['combom2', 'combog', 'combogg'], star: 'combom2' }
   ];
-  $('#ladders').innerHTML = L.map(l => `<div class="lad rv"><div class="h">${l.h}<small>${l.s}</small></div>${l.ids.map(id => {
+  if ($('#ladders')) $('#ladders').innerHTML = L.map(l => `<div class="lad rv"><div class="h">${l.h}<small>${l.s}</small></div>${l.ids.map(id => {
     const it = D.itens.find(i => i.id === id); const cmv = it.custo / it.preco * 100;
     return `<div class="st ${id === l.star ? 'star' : ''}"><div class="a">${id === l.star ? '★ ' : ''}${it.nome}</div><div class="b num">${brl(it.preco)}</div>
     <div class="c"><span>CMV <b>${pct(cmv)}</b></span><span>margem <b>${brl(it.preco - it.custo)}</b></span>${it.de ? `<span class="g">economize ${brl(it.de - it.preco)}</span>` : ''}${it.pp ? `<span>${brl(it.preco / it.pp)}/pessoa</span>` : ''}</div></div>`;

@@ -284,3 +284,14 @@ h2{text-wrap:balance}
 .mlap span{display:block;font-family:var(--fd);font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--vm);margin-bottom:4px}
 .card .ml{display:inline-block;background:#FF7733;color:#fff;font-size:10px;font-weight:800;padding:2px 6px;border-radius:4px;margin-bottom:4px;letter-spacing:.03em}
 @media (max-width:900px){.mlg,.mlap{grid-template-columns:1fr}}
+
+.qj{margin-top:14px;border:2px solid var(--vm);border-radius:14px;padding:10px;background:#fff6f5}
+.qjh{font-size:13px;font-weight:800;display:flex;justify-content:space-between;align-items:center;gap:6px}
+.qjh span{font-size:10px;background:var(--vm);color:#fff;border-radius:6px;padding:2px 6px;white-space:nowrap}
+.qjr{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.qjc{background:#fff;border:1px solid #eee;border-radius:12px;padding:6px;text-align:left;display:flex;flex-direction:column;gap:3px;transition:all .2s}
+.qjc img{width:100%;height:64px;object-fit:cover;border-radius:8px}
+.qjc b{font-size:12px;line-height:1.2}
+.qjc small{font-size:10.5px;color:#717171;line-height:1.2}
+.qjc em{font-style:normal;font-size:12px;font-weight:800;color:var(--vm)}
+.qjc.on{border-color:var(--ok);background:#effaf2}.qjc.on em{color:var(--ok)}
