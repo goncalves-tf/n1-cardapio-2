@@ -3,7 +3,7 @@
 Abrir: https://goncalves-tf.github.io/n1-cardapio-2/ (ou `abrir-site.bat`). Navegar com ↓ e ↑.
 
 1. **Tese (20 s):** "O nº 1 da N1 é o 2 Burguers com Desconto: 10.718 vendidos em 30 dias. E 84% desses pedidos saem sem nada junto."
-2. **Vazamentos iFood (30 s):** "Li o portal da loja de Vitória. O upsell existe em 6 grupos, mas não no item que mais vende. O primeiro item da loja é um cupom de R$ 0,01 que pede para não comprar. E o kit de 4 maioneses tem CMV de até 50%: a R$ 19,90 cai para 38%."
+2. **Vazamentos iFood (30 s):** "Li o portal da loja de Vitória. O upsell existe em 6 grupos, mas não no item que mais vende. O primeiro item da loja é um cupom de R$ 0,01 que pede para não comprar."
 3. **Cardápio novo (30 s):** abre o 2 Burguers no celular e mostra o selo MAIS VENDIDO. "Só no app próprio, a primeira coisa ao abrir o item é Quem pediu, também levou: Coca, 324 pedidos, e batata, 236. Cada produto mostra os 2 dele, direto do BI."
 4. **Teste (15 s):** "Nada vira a rede no achismo: teste de 14 dias, metade das lojas. Conversão tem que subir ou empatar."
 5. **Fecho (5 s):** "Nenhum insumo novo. Nenhum item novo. Só mostrar o que o BI já sabe."

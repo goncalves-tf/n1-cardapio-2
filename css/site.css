@@ -295,3 +295,6 @@ h2{text-wrap:balance}
 .qjc small{font-size:10.5px;color:#717171;line-height:1.2}
 .qjc em{font-style:normal;font-size:12px;font-weight:800;color:var(--vm)}
 .qjc.on{border-color:var(--ok);background:#effaf2}.qjc.on em{color:var(--ok)}
+
+.leaks.two{grid-template-columns:repeat(2,1fr)}
+@media (max-width:1100px){.leaks.two{grid-template-columns:1fr}}
