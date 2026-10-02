@@ -4,7 +4,7 @@ Abrir: https://goncalves-tf.github.io/n1-cardapio-2/ (ou `abrir-site.bat`). Nave
 
 1. **Vazamentos iFood (30 s):** "Li o portal da loja de Vitória. O upsell existe em 6 grupos, mas não no item que mais vende. O primeiro item da loja é um cupom de R$ 0,01 que pede para não comprar."
 2. **Cardápio novo (30 s):** abre o 2 Burguers no celular e mostra o selo MAIS VENDIDO. "Só no app próprio, a primeira coisa ao abrir o item é Quem pediu, também levou: Coca, 324 pedidos, e batata, 236. Cada produto mostra os 2 dele, direto do BI."
-3. **Teste (15 s):** "Nada vira a rede no achismo: teste de 14 dias, metade das lojas. Conversão tem que subir ou empatar."
+3. **Filme (60 s, opcional):** fecha mostrando o complemento no nº 1 do iFood e, no app próprio, o mais vendido e o "Quem pediu, também levou".
 4. **Fecho (5 s):** "Nenhum insumo novo. Nenhum item novo. Só mostrar o que o BI já sabe."
 
 ## Perguntas prováveis
