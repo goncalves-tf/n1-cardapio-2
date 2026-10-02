@@ -4,11 +4,10 @@ Abrir: https://goncalves-tf.github.io/n1-cardapio-2/ (ou `abrir-site.bat`). Nave
 
 1. **Tese (20 s):** "O nº 1 da N1 é o 2 Burguers com Desconto: 10.718 vendidos em 30 dias. E 84% desses pedidos saem sem nada junto."
 2. **Vazamentos iFood (30 s):** "Li o portal da loja de Vitória. O upsell existe em 6 grupos, mas não no item que mais vende. O primeiro item da loja é um cupom de R$ 0,01 que pede para não comprar. E o kit de 4 maioneses tem CMV de até 50%: a R$ 19,90 cai para 38%."
-3. **Mercado Livre (40 s):** "O Mercado Livre já resolveu isso com dois selos. Mais vendido, com número: no app próprio, selo e 10.718 vendidos; no iFood, categoria Mais pedidos no topo. E compre junto, escolhido pelo dado: quem leva algo junto com o nº 1 leva batata e Coca. Então o adicional do nº 1 é batata + Coca por R$ 14,90, um kit que já existe no cardápio."
-4. **Cardápio novo (30 s):** abre o 2 Burguers no celular, mostra o selo MAIS VENDIDO e marca "Quem pediu, também levou".
-5. **Números (20 s):** "Cada aceite rende R$ 9,24 de margem. Com 20% de aceite são R$ 19,8 mil em 30 dias, só no nº 1."
-6. **Teste (15 s):** "Nada vira a rede no achismo: teste de 14 dias, metade das lojas. Conversão tem que subir ou empatar."
-7. **Fecho (5 s):** "Nenhum insumo novo. Nenhum item novo. Só mostrar o que o BI já sabe."
+3. **Cardápio novo (30 s):** abre o 2 Burguers no celular, mostra o selo MAIS VENDIDO e marca "Quem pediu, também levou".
+4. **Números (20 s):** "Cada aceite rende R$ 9,24 de margem. Com 20% de aceite são R$ 19,8 mil em 30 dias, só no nº 1."
+5. **Teste (15 s):** "Nada vira a rede no achismo: teste de 14 dias, metade das lojas. Conversão tem que subir ou empatar."
+6. **Fecho (5 s):** "Nenhum insumo novo. Nenhum item novo. Só mostrar o que o BI já sabe."
 
 ## Perguntas prováveis
 
