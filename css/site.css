@@ -298,3 +298,19 @@ h2{text-wrap:balance}
 
 .leaks.two{grid-template-columns:repeat(2,1fr)}
 @media (max-width:1100px){.leaks.two{grid-template-columns:1fr}}
+
+.hero1{display:grid;grid-template-columns:1.1fr 1fr;background:#fff;border:4px solid var(--pr);border-radius:28px;overflow:hidden;box-shadow:12px 12px 0 var(--pr);margin-top:40px}
+.h1pic{position:relative;min-height:420px;background:var(--am)}
+.h1pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.h1tag{position:absolute;left:18px;top:18px;background:var(--vm);color:#fff;font-weight:800;padding:8px 14px;border-radius:10px;border:3px solid var(--pr);font-size:15px}
+.h1tx{padding:36px 38px;display:flex;flex-direction:column;justify-content:center}
+.h1tx h3{font-weight:900;font-style:italic;font-size:clamp(30px,3.2vw,48px);line-height:1;letter-spacing:-.02em;margin-top:10px}
+.h1tx p{font-size:19px;line-height:1.45;margin-top:14px;color:#3a342b}
+.h1mock{margin-top:22px;border:2px solid var(--line);border-radius:16px;overflow:hidden}
+.h1mock .r{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;font-weight:700;font-size:16px}
+.h1mock .r+.r{border-top:2px solid var(--line)}
+.h1mock .r b{font-size:12px;padding:4px 10px;border-radius:999px}
+.h1mock .ok b{background:var(--pr);color:#fff}
+.h1mock .no{background:#fff1ef;color:#8a1a14}
+.h1mock .no b{background:var(--vm);color:#fff}
+@media (max-width:900px){.hero1{grid-template-columns:1fr}.h1pic{min-height:260px}}
