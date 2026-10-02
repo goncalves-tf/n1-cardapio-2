@@ -306,18 +306,20 @@ img{display:block}
 
 <div id="wipe"><div class="wb wk" id="wk"></div><div class="wb wy" id="wy"></div><div class="wb wr" id="wr"></div></div>
 <div id="grain"></div>
-<div class="ov" id="ovStart"><button class="bigbtn" id="btnStart" type="button">▶ Assistir (60s)</button></div>
+<div class="ov" id="ovStart"><button class="bigbtn" id="btnStart" type="button">▶ Assistir com som (60s)</button></div>
 <div class="ov" id="ovEnd" hidden><button class="bigbtn" id="btnAgain" type="button">↻ Ver de novo</button></div>
 </div>
 </div>
 <div id="bar">
   <button id="bPlay" type="button" aria-label="Play"><svg viewBox="0 0 24 24" id="icPlay"><path d="M6 4l14 8-14 8z"/></svg></button>
+  <button id="bSom" type="button" aria-label="Som"><svg viewBox="0 0 24 24" id="icSom"><path d="M4 9v6h4l5 4V5L8 9H4zm12.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z"/></svg></button>
   <button id="bRe" type="button" aria-label="Reiniciar"><svg viewBox="0 0 24 24"><path d="M12 4a8 8 0 1 1-7.4 5h2.3A6 6 0 1 0 12 6v3L7 5l5-4z"/></svg></button>
   <div id="track" aria-label="Progresso"><div class="rail"><div id="fill"></div></div><div id="knob"></div></div>
   <div id="time">0:00 / 1:00</div>
 </div>
 </div>
 
+<audio id="narr" src="assets/audio/narracao.mp3" preload="auto"></audio>
 <script>
 (function(){
 'use strict';
@@ -595,6 +597,10 @@ function render(t, showUI){
 }
 
 var t = 0, playing = false, started = false, last = 0;
+var narr = document.getElementById('narr');
+var SOM_ON = '<path d="M4 9v6h4l5 4V5L8 9H4zm12.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z"/>', SOM_OFF = '<path d="M4 9v6h4l5 4V5L8 9H4zm15.6 3 2.2-2.2-1.4-1.4L18.2 10.6 16 8.4l-1.4 1.4 2.2 2.2-2.2 2.2 1.4 1.4 2.2-2.2 2.2 2.2 1.4-1.4z"/>';
+$('bSom').addEventListener('click', function(){ narr.muted = !narr.muted; $('icSom').innerHTML = narr.muted ? SOM_OFF : SOM_ON; });
+window.__film = { seek: function(x){ started = true; ovStart.hidden = true; ovEnd.hidden = true; t = x; render(x, false); }, dur: DUR };
 var ovStart = $('ovStart'), ovEnd = $('ovEnd');
 function setIcon(){
   $('icPlay').innerHTML = playing ? '<path d="M6 4h4v16H6zM14 4h4v16h-4z"/>' : '<path d="M6 4l14 8-14 8z"/>';
@@ -604,7 +610,8 @@ function loop(now){
   if (!playing) return;
   var dt = Math.min(.1, (now - last) / 1000); last = now;
   t += dt;
-  if (t >= DUR){ t = DUR; playing = false; render(t); ovEnd.hidden = false; setIcon(); return; }
+  if (narr && !narr.paused && Math.abs(narr.currentTime - t) > .25) t = narr.currentTime;
+  if (t >= DUR){ t = DUR; playing = false; render(t); ovEnd.hidden = false; setIcon(); if (narr) narr.pause(); return; }
   render(t);
   requestAnimationFrame(loop);
 }
@@ -613,9 +620,10 @@ function play(){
   if (t >= DUR) t = 0;
   ovStart.hidden = true; ovEnd.hidden = true;
   playing = true; last = performance.now(); setIcon();
+  if (narr){ try { narr.currentTime = t; var pr = narr.play(); if (pr && pr.catch) pr.catch(function(){}); } catch (e) {} }
   requestAnimationFrame(loop);
 }
-function pause(){ playing = false; setIcon(); }
+function pause(){ playing = false; setIcon(); if (narr) narr.pause(); }
 function toggle(){ if (playing) pause(); else play(); }
 function restart(){ started = true; t = 0; render(0); play(); }
 
@@ -637,6 +645,7 @@ function seekFromEvent(e){
   t = p * DUR; started = true; ovStart.hidden = true;
   ovEnd.hidden = t < DUR;
   render(t);
+  if (narr){ try { narr.currentTime = Math.min(t, DUR); } catch (e) {} }
 }
 track.addEventListener('pointerdown', function(e){ dragging = true; track.setPointerCapture(e.pointerId); seekFromEvent(e); });
 track.addEventListener('pointermove', function(e){ if (dragging) seekFromEvent(e); });
